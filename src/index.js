@@ -3,6 +3,7 @@ import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 
 import App from './App'
+import '../styles/main.scss'
 
 const renderView = Component => {
     render(
