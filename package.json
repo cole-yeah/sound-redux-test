@@ -11,6 +11,7 @@
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "node-sass": "^4.5.0",
+    "normalizr": "^3.2.3",
     "postcss-loader": "^2.0.6",
     "react-hot-loader": "^3.0.0-beta.7",
     "sass-loader": "^6.0.6",
@@ -19,11 +20,16 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "soundcloud": "^3.2.2"
   },
   "scripts": {
     "start": "webpack-dev-server",
