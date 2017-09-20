@@ -29,10 +29,10 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
     ],
     devServer: {
-        host: 'localhost',
+        host: '0.0.0.0',
         port: 3030,
         historyApiFallback: true,
         hot: true
