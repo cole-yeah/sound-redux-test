@@ -1,5 +1,7 @@
 import React from 'react'
 
+import NavSearch from './NavSearch'
+
 const Nav = () => {
     return (
         <div className='nav'>
@@ -9,6 +11,10 @@ const Nav = () => {
                     <a className='nav__logo__text'>
                         SoundRedux
                     </a>
+                </div>
+                <div className='nav__section nav__section--session'></div>
+                <div className='nav__section nav__section--search'>
+                    <NavSearch/>
                 </div>
             </div>
         </div>

@@ -2,14 +2,15 @@ import React from 'react'
 
 import NavContainer from './NavContainer'
 import PlayListsContainer from './PlayListsContainer'
+import SongsContainer from './SongsContainer'
 
-const Root = () => {
+const RootContainer = () => {
     return (
         <div>
             <NavContainer/>
-            <PlayListsContainer/>
+            <SongsContainer/>
         </div>
     )
 }
 
-export default Root
+export default RootContainer

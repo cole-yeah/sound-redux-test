@@ -3,7 +3,7 @@ import 'isomorphic-fetch'
 import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 
-import Root from './containers/Root'
+import RootContainer from './containers/RootContainer'
 import configureStore from './store/configureStore'
 
 const store = configureStore()
@@ -12,7 +12,7 @@ class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <Root/>
+                <RootContainer/>
             </Provider>
         )
     }
