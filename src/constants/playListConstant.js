@@ -8,3 +8,9 @@ export const GENRES = [
     { key: 'trance', query: 'trance' },
     { key: 'tropical', query: 'tropical house' },
   ]
+
+  export const TIMES = [
+    { key: '7', label: '7 days' },
+    { key: '30', label: '30 days' },
+    { key: '90', label: '90 days' },
+  ]
