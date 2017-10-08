@@ -1,3 +1,5 @@
+export const PLAYLIST_PLAYLIST_TYPE = 'PLAYLIST_PLAYLIST_TYPE'
+
 export const GENRES = [
     { key: 'chill', query: 'chill house' },
     { key: 'deep', query: 'deep house' },

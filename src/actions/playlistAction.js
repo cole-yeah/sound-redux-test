@@ -5,7 +5,15 @@ import { songSchema } from '../constants/schema'
 import { getPlaylists } from '../selectors/commonSelector'
 import { callApi } from '../utils/apiUtil'
 
-export const fetchSongsRequest = playlist => ({})
+export const fetchSongsRequest = playlist => ({});
+
+export const fetchSongsSuccess = (result, entities, nextUrl, futureUrl) => ({
+    type: types.FETCH_SONGS_SUCCESS,
+    result,
+    entities,
+    nextUrl,
+    futureUrl,
+})
 
 export const fetchSongs = (playlist, url) => async (dispatch) => {
     // dispatch(fetch)
@@ -13,6 +21,13 @@ export const fetchSongs = (playlist, url) => async (dispatch) => {
 
     const collection = json.collection || json;
 
-    console.log('collection----', collection)
-    console.log('json----', json)
+    const songs = collection.map(song => song.origin || song)
+                    .filter(song => song.kind === 'track' && song.streamable);
+    const nextUrl = json.nextHref || null;
+    const futureUrl = json.futureHref || null;
+
+    const { result, entities } = normalize(songs, [songSchema]);
+    
+    dispatch(fetchSongsSuccess(result, entities, nextUrl, futureUrl))
+
 }
