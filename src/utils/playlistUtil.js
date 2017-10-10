@@ -4,15 +4,6 @@ const isFetching = (playlist, playlists) => (playlist in playlists
     ? playlists[playlist].isFetching : false);
 
 export const playlistData = (
-    genre,
-    search,
-    showLike,
-    showPlaylist,
-    showStream,
-    time,
-    entities,
-    id,
-    oauthToken,
     playlists,
 ) => {
     // if(showLike) {
@@ -46,6 +37,11 @@ export const playlistData = (
             playlistNextUrl: playlistNextUrl(playlist, playlists, oauthToken),
             songs: playlistSongs(playlist, playlists, entities),
         }
+    }
+
+    const playlist = []
+    return {
+        playlist
     }
 
 }

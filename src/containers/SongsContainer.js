@@ -14,8 +14,4 @@ const mapStateToProps = (state) => {
     return state
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     fetchSongs: (playlist, url) => dispatch(fetchSongs(playlist, url))
-// }
-
 export default connect(mapStateToProps, {fetchSongs})(SongsContainer)
