@@ -16,13 +16,14 @@ class Songs extends Component {
     }
 
     render() {
-        const { songs, playlist } = this.props
+        const { songs, playlist, isFetching } = this.props
         return (
             <div>
                 <SongsHeader />
                 <SongsBody 
                     songs={songs}
-                    playlist={playlist}/>
+                    playlist={playlist}
+                    isFetching={isFetching}/>
             </div>
         )
     }
