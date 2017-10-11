@@ -11,13 +11,6 @@ const isFetching = (playlist, playlists) => (playlist in playlists
 const playlistSongs = (playlist, playlists, entities) => (playlist in playlists
     ? denormalize(playlists[playlist].items, [songSchema], entities):[])
 
-// const playlistSongs = (playlist, playlists, entities) => {
-//     console.log(playlist in playlists)
-//     console.log('playlist', playlist)
-//     console.log('playlists', playlists)
-//     console.log('entities', entities)
-// }
-
 const genrePlaylistUrl = (genre, time) => {
     const genreUriSegment = `&tag=${GENRE_QUERY_MAP[genre] || genre}`
     const timeUriSegment = time ? `&created_at[from]=${moment().subtract(Number(time), 'days').format('YYYY-MM-DD%2012:00:00')}` : ''

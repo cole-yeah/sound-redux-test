@@ -1,9 +1,12 @@
 import React from 'react'
 
-const SongsBody = () => {
+import SongsBodyRendered from './SongsBodyRendered'
+
+const SongsBody = props => {
     return (
-        <div>
-            SongsBody
+        <div className='songs-body'>
+            <SongsBodyRendered
+                songs={props.songs}/>
         </div>
     )
 }
