@@ -5,15 +5,24 @@ import SongsBody from './SongsBody'
 
 class Songs extends Component {
 
+    constructor(props) {
+        super(props)
+    }
+
     componentWillMount() {
-        this.props.fetchSongs('1', '2')
+        console.log('this.props---', this.props)
+        const { playlistUrl, playlist } = this.props
+        this.props.fetchSongs(playlist, playlistUrl)
     }
 
     render() {
+        const { songs, playlist } = this.props
         return (
             <div>
                 <SongsHeader />
-                <SongsBody />
+                <SongsBody 
+                    songs={songs}
+                    playlist={playlist}/>
             </div>
         )
     }

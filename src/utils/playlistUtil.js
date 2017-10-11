@@ -1,21 +1,41 @@
-import { denormalize } from 'normalizr';
+import { denormalize } from 'normalizr'
+import moment from 'moment'
+
+import { songSchema } from '../constants/schema'
+import { PLAYLIST_PLAYLIST_TYPE, GENRE_PLAYLIST_TYPE, GENRE_QUERY_MAP } from '../constants/playListConstant'
+import { FETCH_SONGS } from '../constants/apiConstant'
 
 const isFetching = (playlist, playlists) => (playlist in playlists
     ? playlists[playlist].isFetching : false);
 
+const playlistSongs = (playlist, playlists, entities) => (playlist in playlists
+    ? denormalize(playlists[playlist].items, [songSchema], entities):[])
+
+// const playlistSongs = (playlist, playlists, entities) => {
+//     console.log(playlist in playlists)
+//     console.log('playlist', playlist)
+//     console.log('playlists', playlists)
+//     console.log('entities', entities)
+// }
+
+const genrePlaylistUrl = (genre, time) => {
+    const genreUriSegment = `&tag=${GENRE_QUERY_MAP[genre] || genre}`
+    const timeUriSegment = time ? `&created_at[from]=${moment().subtract(Number(time), 'days').format('YYYY-MM-DD%2012:00:00')}` : ''
+
+    return `${FETCH_SONGS}${timeUriSegment}${genreUriSegment}`
+}
+
+const playlistNextUrl = (playlist, playlists, oauthToken) => (playlist in playlists && playlists[playlist].playlistNextUrl
+    ? `${playlists[playlist].nextUrl}${oauthToken?`&oauth_token=${oauthToken}`:''}`:null)
+
 export const playlistData = (
     playlists,
+    id,
+    showPlaylist,
+    entities,
+    genre,
+    time,
 ) => {
-    // if(showLike) {
-    //     const playlist = SESSION_LIKES_PLAYLIST;
-    //     return {
-    //         isFetching: isFetching(playlist, playlists),
-    //         playlist,
-    //         playlistUrl: `${SESSION_LIKES_URL}?oauth_token=${oauthToken}`,
-    //         playlistNextUrl: null,
-    //         songs: playlistSongs(playlist, playlists, entities),
-    //     }
-    // }
 
     if(showPlaylist) {
         const playlist = `${PLAYLIST_PLAYLIST_TYPE}|${id}`;
@@ -28,20 +48,13 @@ export const playlistData = (
         }
     }
 
-    if(showStream) {
-        const playlist = SESSION_STREAM_PLAYLIST;
-        return {
-            isFetching: isFetching(playlist, playlists),
-            playlist,
-            playlistUrl: `${SESSION_STREAM_URL}?oauth_token=${oauthToken}`,
-            playlistNextUrl: playlistNextUrl(playlist, playlists, oauthToken),
-            songs: playlistSongs(playlist, playlists, entities),
-        }
-    }
-
-    const playlist = []
+    const playlist = [GENRE_PLAYLIST_TYPE, genre, time].join('|');
     return {
-        playlist
+        isFetching: isFetching(playlist, playlists),
+        playlist,
+        playlistUrl: genrePlaylistUrl(genre, time),
+        playlistNextUrl: playlistNextUrl(playlist, playlists),
+        songs: playlistSongs(playlist, playlists, entities)
     }
 
 }

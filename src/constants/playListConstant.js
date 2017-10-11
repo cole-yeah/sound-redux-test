@@ -1,3 +1,4 @@
+export const GENRE_PLAYLIST_TYPE = 'GENRE_PLAYLIST_TYPE'
 export const PLAYLIST_PLAYLIST_TYPE = 'PLAYLIST_PLAYLIST_TYPE'
 
 export const GENRES = [
@@ -10,6 +11,11 @@ export const GENRES = [
     { key: 'trance', query: 'trance' },
     { key: 'tropical', query: 'tropical house' },
   ]
+
+  export const GENRE_QUERY_MAP = GENRES.reduce((obj, genre) => ({
+    ...obj,
+    [genre.key]: genre.query,
+  }), {})
 
   export const TIMES = [
     { key: '7', label: '7 days' },

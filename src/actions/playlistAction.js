@@ -5,19 +5,23 @@ import { songSchema } from '../constants/schema'
 import { getPlaylists } from '../selectors/commonSelector'
 import { callApi } from '../utils/apiUtil'
 
-export const fetchSongsRequest = playlist => ({});
+export const fetchSongsRequest = playlist => ({
+    type: types.FETCH_SONGS_REQUEST,
+    playlist,
+});
 
-export const fetchSongsSuccess = (result, entities, nextUrl, futureUrl) => ({
+export const fetchSongsSuccess = (items, entities, nextUrl, futureUrl, playlist) => ({
     type: types.FETCH_SONGS_SUCCESS,
-    result,
+    items,
     entities,
     nextUrl,
     futureUrl,
+    playlist,
 })
 
 export const fetchSongs = (playlist, url) => async (dispatch) => {
-    // dispatch(fetch)
-    const { json } = await callApi('//api.soundcloud.com/tracks?linked_partitioning=1&limit=50&offset=0&client_id=f4323c6f7c0cd73d2d786a2b1cdae80c&tags=house', {});
+    dispatch(fetchSongsRequest(playlist))
+    const { json } = await callApi(url, {});
 
     const collection = json.collection || json;
 
@@ -28,6 +32,6 @@ export const fetchSongs = (playlist, url) => async (dispatch) => {
 
     const { result, entities } = normalize(songs, [songSchema]);
     
-    dispatch(fetchSongsSuccess(result, entities, nextUrl, futureUrl))
+    dispatch(fetchSongsSuccess(result, entities, nextUrl, futureUrl, playlist))
 
 }

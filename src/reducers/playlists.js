@@ -9,6 +9,11 @@ const initialState = {
 
 function playlist(state = initialState, action) {
     switch(action.type) {
+        case types.FETCH_SONGS_REQUEST:
+            return {
+                ...state,
+                isFetching: true,
+            }
         case types.FETCH_SONGS_SUCCESS:
             return { 
                 ...state, 
@@ -23,7 +28,11 @@ function playlist(state = initialState, action) {
 export default function playlists(state={}, action) {
     switch(action.type) {
         case types.FETCH_SONGS_SUCCESS:
-            return { ...state, result: action.result, entities: action.entities }
+        case types.FETCH_SONGS_REQUEST: 
+            return { 
+                ...state,
+                [action.playlist]: playlist(state[action.playlist], action)
+            }
         default:
             return state
     }
