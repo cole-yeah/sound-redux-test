@@ -12,7 +12,7 @@ const playlistSongs = (playlist, playlists, entities) => (playlist in playlists
     ? denormalize(playlists[playlist].items, [songSchema], entities):[])
 
 const genrePlaylistUrl = (genre, time) => {
-    const genreUriSegment = `&tag=${GENRE_QUERY_MAP[genre] || genre}`
+    const genreUriSegment = `&tags=${GENRE_QUERY_MAP[genre] || genre}`
     const timeUriSegment = time ? `&created_at[from]=${moment().subtract(Number(time), 'days').format('YYYY-MM-DD%2012:00:00')}` : ''
 
     return `${FETCH_SONGS}${timeUriSegment}${genreUriSegment}`
