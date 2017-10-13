@@ -1,11 +1,17 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import Nav from '../components/Nav'
+import { navigateTo } from '../actions/routerAction'
 
-const NavContainer = () => {
+const NavContainer = props => {
     return (
-        <Nav/>
+        <Nav {...props}/>
     )
 }
 
-export default NavContainer
+const mapStateToProps = state => {
+    return {}
+}
+
+export default connect(mapStateToProps, { navigateTo })(NavContainer)
