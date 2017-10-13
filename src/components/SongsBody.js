@@ -18,7 +18,7 @@ class SongsBody extends Component {
     }
 
     onScroll() {
-        this.setState()
+        // this.setState()
     }
 
     render() {

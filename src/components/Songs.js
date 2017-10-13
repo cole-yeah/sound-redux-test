@@ -10,20 +10,29 @@ class Songs extends Component {
     }
 
     componentWillMount() {
-        console.log('this.props---', this.props)
         const { playlistUrl, playlist } = this.props
         this.props.fetchSongs(playlist, playlistUrl)
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.playlistUrl !== this.props.playlistUrl) {  
+            nextProps.fetchSongs(nextProps.playlist, nextProps.playlistUrl)
+        }
+    }
+
     render() {
-        const { songs, playlist, isFetching } = this.props
+        const { songs, playlist, isFetching, navigateTo } = this.props
         return (
             <div>
-                <SongsHeader />
-                <SongsBody 
-                    songs={songs}
-                    playlist={playlist}
-                    isFetching={isFetching}/>
+                <SongsHeader 
+                    navigateTo={navigateTo}/>
+                    {
+                        isFetching?<div>正在加载……</div>:
+                        <SongsBody 
+                            songs={songs}
+                            playlist={playlist}
+                            isFetching={isFetching}/>
+                    }
             </div>
         )
     }

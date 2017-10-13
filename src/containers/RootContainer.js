@@ -16,7 +16,6 @@ class RootContainer extends Component {
 
     render() {
         const { paths, router, routes } = this.props
-        console.log('this.props', this.props)
         return (
             <div>
                 <NavContainer/>
@@ -34,7 +33,7 @@ const mapStateToProps = state => {
         routes: {
             [INDEX_PATH]: SongsContainer,
             [SONG_PATH]: SongsContainer,
-            [SONGS_PATH]: PlayListsContainer,
+            [SONGS_PATH]: SongsContainer,
             [PLAYLIST_PATH]: SongsContainer,
             [ERROR_PATH]: ErrorContainer,
         }
